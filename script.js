@@ -28,6 +28,36 @@ $('.search-button').on('click', function () {
     });
 });
 
+$('.homeButton').on('click', function() {
+    $.ajax({
+        url: 'http://www.omdbapi.com/?apikey=9b1f5fe7&s=avengers',
+        success: results => {
+            const films = results.Search;
+            let cards = '';
+            films.forEach(f => {
+                cards += showCards(f);
+            });
+            $('.films-container').html(cards);
+    
+            $('.modal-detail-button').on('click', function () {
+                $.ajax({
+                    url: 'http://www.omdbapi.com/?apikey=9b1f5fe7&i=' + $(this).data('imdbid'),
+                    success: f => {
+                        const detailFilms = showDetailFilms(f);
+                        $('.modal-body').html(detailFilms);
+                    },
+                    error: (e) => {
+                        console.log(e.responseText);
+                    }
+                });
+            });
+        },
+        error: (e) => {
+            console.log(e.responseText);
+        }
+    });
+});
+
 $.ajax({
     url: 'http://www.omdbapi.com/?apikey=9b1f5fe7&s=avengers',
     success: results => {
@@ -58,13 +88,13 @@ $.ajax({
 
 
 function showCards(f) {
-    return `<div class="col-md-4 my-4">
+    return `<div class="col-md-2 mx-2 divCard">
                 <div class="card cardStyling">
-                    <img src="${f.Poster}" class="card-img-top">
-                    <div class="card-body">
+                    <img src="${f.Poster}" class="card-img-top cardPoster">
+                    <div class="card-body divCardBody">
                     <h5 class="card-title">${f.Title}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">${f.Year}</h6>
-                    <a href="#" class="btn btn-primary modal-detail-button" data-toggle="modal" 
+                    <a href="#" class="btn btn-secondary modal-detail-button" data-toggle="modal" 
                     data-target="#filmsDetailModal" data-imdbid="${f.imdbID}">Show Details</a>
                     </div>
                 </div>

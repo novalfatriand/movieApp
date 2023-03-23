@@ -2,7 +2,71 @@
 *{
     font-family: 'Poppins', sans-serif;
     /*background-color: #f50000;*/
+    /*background-color: #163447*/
 }
 .cardStyling {
-    width: 290px;
+    height: 515px;
+    width: 200px;
+    border-radius: 15px;
+}
+.cardPoster {
+    height: 300px;
+    border-radius: 15px 15px 0 0;
+}
+.rowHeader {
+    padding-top: 60px;
+}
+.input-keyword {
+    border-radius: 20px 0 0px 20px;
+}
+.search-button {
+    border-radius: 20px;
+    width: 130px;
+}
+.registerButton {
+    border-radius: 20px;
+    width: 150px;
+}
+.navbar {
+    height: 80px;
+    background-color: #2f5771;
+}
+.navbarStyling {
+    margin-left: 30px;
+}
+.navbarSatuan {
+    margin-left: 10px !important;
+}
+.latestMovies {
+    color: black;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+.seeMore {
+    margin-left: 820px;
+}
+.divCard {
+    margin-bottom: 20px;
+}
+.modal-detail-button{
+    border-radius: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+}
+.closeButton {
+    border-radius: 20px;
+}
+.watchButton {
+    border-radius: 20px;
+}   
+.modalRadius {
+    border-radius: 20px !important;
+}
+.textFooter {
+    margin-top: 50px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 30px;
 }
