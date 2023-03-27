@@ -1,90 +1,97 @@
-$('.search-button').on('click', function () {
-    $.ajax({
-        url: 'http://www.omdbapi.com/?apikey=9b1f5fe7&s=' + $('.input-keyword').val(),
-        success: results => {
-            const films = results.Search;
+// Fetch() | Function Search Button
+const searchButton = document.querySelector('.search-button');
+searchButton.addEventListener('click', function() {
+
+    const inputKeyword = document.querySelector('.input-keyword');
+    fetch('http://www.omdbapi.com/?apikey=9b1f5fe7&s=' + inputKeyword.value)
+        .then(response => response.json())
+        .then(response => {
+            const films = response.Search;
             let cards = '';
-            films.forEach(f => {
-                cards += showCards(f);
-            });
-            $('.films-container').html(cards);
-    
-            $('.modal-detail-button').on('click', function () {
-                $.ajax({
-                    url: 'http://www.omdbapi.com/?apikey=9b1f5fe7&i=' + $(this).data('imdbid'),
-                    success: f => {
-                        const detailFilms = showDetailFilms(f);
-                        $('.modal-body').html(detailFilms);
-                    },
-                    error: (e) => {
-                        console.log(e.responseText);
-                    }
+            films.forEach(f => cards += showCards(f));
+
+            const movieContainer = document.querySelector('.films-container');
+            movieContainer.innerHTML = cards;
+
+
+            // Ketika tombol Show Details di klik
+            const modalDetail = document.querySelectorAll('.modal-detail-button');
+            modalDetail.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const imdbid = this.dataset.imdbid;
+                    fetch('http://www.omdbapi.com/?apikey=9b1f5fe7&i=' + imdbid)
+                        .then(response => response.json())
+                        .then(f => {
+                            const detailFilms = showDetailFilms(f);
+                            const modalBody = document.querySelector('.modal-body');
+                            modalBody.innerHTML = detailFilms;
+                        });
                 });
             });
-        },
-        error: (e) => {
-            console.log(e.responseText);
-        }
-    });
+        });
 });
 
-$('.homeButton').on('click', function() {
-    $.ajax({
-        url: 'http://www.omdbapi.com/?apikey=9b1f5fe7&s=avengers',
-        success: results => {
-            const films = results.Search;
+
+// Function Home Button 
+const homeButton = document.querySelector('.homeButton');
+homeButton.addEventListener('click', function() {
+
+    fetch('http://www.omdbapi.com/?apikey=9b1f5fe7&s=avengers')
+        .then(response => response.json())
+        .then(response => {
+            const films = response.Search;
             let cards = '';
-            films.forEach(f => {
-                cards += showCards(f);
-            });
-            $('.films-container').html(cards);
-    
-            $('.modal-detail-button').on('click', function () {
-                $.ajax({
-                    url: 'http://www.omdbapi.com/?apikey=9b1f5fe7&i=' + $(this).data('imdbid'),
-                    success: f => {
-                        const detailFilms = showDetailFilms(f);
-                        $('.modal-body').html(detailFilms);
-                    },
-                    error: (e) => {
-                        console.log(e.responseText);
-                    }
+            films.forEach(f => cards += showCards(f));
+
+            const movieContainer = document.querySelector('.films-container');
+            movieContainer.innerHTML = cards;
+
+
+            // Ketika tombol Show Details di klik
+            const modalDetail = document.querySelectorAll('.modal-detail-button');
+            modalDetail.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const imdbid = this.dataset.imdbid;
+                    fetch('http://www.omdbapi.com/?apikey=9b1f5fe7&i=' + imdbid)
+                        .then(response => response.json())
+                        .then(f => {
+                            const detailFilms = showDetailFilms(f);
+                            const modalBody = document.querySelector('.modal-body');
+                            modalBody.innerHTML = detailFilms;
+                        });
                 });
             });
-        },
-        error: (e) => {
-            console.log(e.responseText);
-        }
-    });
+        });
 });
 
-$.ajax({
-    url: 'http://www.omdbapi.com/?apikey=9b1f5fe7&s=avengers',
-    success: results => {
-        const films = results.Search;
-        let cards = '';
-        films.forEach(f => {
-            cards += showCards(f);
-        });
-        $('.films-container').html(cards);
 
-        $('.modal-detail-button').on('click', function () {
-            $.ajax({
-                url: 'http://www.omdbapi.com/?apikey=9b1f5fe7&i=' + $(this).data('imdbid'),
-                success: f => {
-                    const detailFilms = showDetailFilms(f);
-                    $('.modal-body').html(detailFilms);
-                },
-                error: (e) => {
-                    console.log(e.responseText);
-                }
+// Function Beranda 
+    fetch('http://www.omdbapi.com/?apikey=9b1f5fe7&s=avengers')
+        .then(response => response.json())
+        .then(response => {
+            const films = response.Search;
+            let cards = '';
+            films.forEach(f => cards += showCards(f));
+
+            const movieContainer = document.querySelector('.films-container');
+            movieContainer.innerHTML = cards;
+
+
+            // Ketika tombol Show Details di klik
+            const modalDetail = document.querySelectorAll('.modal-detail-button');
+            modalDetail.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const imdbid = this.dataset.imdbid;
+                    fetch('http://www.omdbapi.com/?apikey=9b1f5fe7&i=' + imdbid)
+                        .then(response => response.json())
+                        .then(f => {
+                            const detailFilms = showDetailFilms(f);
+                            const modalBody = document.querySelector('.modal-body');
+                            modalBody.innerHTML = detailFilms;
+                        });
+                });
             });
         });
-    },
-    error: (e) => {
-        console.log(e.responseText);
-    }
-});
 
 
 function showCards(f) {
